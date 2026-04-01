@@ -7,10 +7,6 @@
 - SliceIterator
 - RangeIterator (end-exclusive semantics)
 
-### Notes
-- Lazy, single-pass iteration model
-- No concurrency or error handling in this version
-
 ---
 
 
