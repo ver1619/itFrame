@@ -1,21 +1,22 @@
-# *itFrame*
+# _itFrame_
 
-itFrame is a pull-based iterator framework in Go designed for:
+***itFrame*** is a **pull-based iterator framework** in Go designed for:
+
 - lazy evaluation
 - composable iteration
 - minimal allocation overhead
 
 ---
 
-## Current Version: v0.1.0
-
 ### Features
+
 - Generic Iterator interface
 - SliceIterator
 - RangeIterator (end-exclusive)
+- MapIterator
+- FilterIterator
 
 ---
-
 
 ### Requirements
 
@@ -23,15 +24,13 @@ itFrame is a pull-based iterator framework in Go designed for:
 go 1.23+
 ```
 
-
 ### Installation
 
 ```go
 go get github.com/ver1619/itFrame
 ```
 
-
-----
+---
 
 ### To run tests
 
@@ -41,62 +40,8 @@ go test ./...
 
 ---
 
-
-### Examples
-
-
-#### 1. Slice Iterator
+### To run sample code
 
 ```go
-package main
-
-import (
-	"fmt"
-
-	"github.com/ver1619/itFrame/core"
-)
-
-func main() {
-	it := core.Slice([]int{10, 20, 30})
-
-	for {
-		val, ok := it.Next()
-		if !ok {
-			break
-		}
-		fmt.Println(val)
-	}
-}
+go run ./examples/<file_path>
 ```
-
-#### 2. Range Iterator
-
-```go
-package main
-
-import (
-	"fmt"
-
-	"github.com/ver1619/itFrame/core"
-)
-
-func main() {
-	it := core.Range(0, 5, 1)
-
-	for {
-		val, ok := it.Next()
-		if !ok {
-			break
-		}
-		fmt.Println(val)
-	}
-}
-```
-
-
-Run:
-```go
-go run <file.go>
-```
-
-
