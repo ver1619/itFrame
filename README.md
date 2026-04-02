@@ -57,7 +57,7 @@ import (
 )
 
 func main() {
-	it := core.NewSliceIterator([]int{10, 20, 30})
+	it := core.Slice([]int{10, 20, 30})
 
 	for {
 		val, ok := it.Next()
@@ -81,7 +81,7 @@ import (
 )
 
 func main() {
-	it := core.NewRangeIterator(0, 5, 1)
+	it := core.Range(0, 5, 1)
 
 	for {
 		val, ok := it.Next()
