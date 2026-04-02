@@ -5,7 +5,7 @@ type SliceIterator[T any] struct {
 	idx  int
 }
 
-func NewSliceIterator[T any](data []T) *SliceIterator[T] {
+func Slice[T any](data []T) *SliceIterator[T] {
 	return &SliceIterator[T]{data: data}
 }
 

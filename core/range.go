@@ -7,7 +7,7 @@ type RangeIterator struct {
 	done    bool
 }
 
-func NewRangeIterator(start, end, step int) *RangeIterator {
+func Range(start, end, step int) *RangeIterator {
 	if step == 0 {
 		panic("step cannot be zero")
 	}

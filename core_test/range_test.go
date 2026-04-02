@@ -7,7 +7,7 @@ import (
 )
 
 func TestRangeIterator_Forward(t *testing.T) {
-	it := core.NewRangeIterator(0, 5, 1)
+	it := core.Range(0, 5, 1)
 
 	expected := []int{0, 1, 2, 3, 4}
 	for i, v := range expected {
@@ -27,7 +27,7 @@ func TestRangeIterator_Forward(t *testing.T) {
 }
 
 func TestRangeIterator_Backward(t *testing.T) {
-	it := core.NewRangeIterator(5, 0, -1)
+	it := core.Range(5, 0, -1)
 
 	expected := []int{5, 4, 3, 2, 1}
 	for i, v := range expected {
@@ -47,7 +47,7 @@ func TestRangeIterator_Backward(t *testing.T) {
 }
 
 func TestRangeIterator_InvalidForward(t *testing.T) {
-	it := core.NewRangeIterator(5, 0, 1)
+	it := core.Range(5, 0, 1)
 
 	_, ok := it.Next()
 	if ok {
@@ -56,7 +56,7 @@ func TestRangeIterator_InvalidForward(t *testing.T) {
 }
 
 func TestRangeIterator_InvalidBackward(t *testing.T) {
-	it := core.NewRangeIterator(0, 5, -1)
+	it := core.Range(0, 5, -1)
 
 	_, ok := it.Next()
 	if ok {
@@ -65,7 +65,7 @@ func TestRangeIterator_InvalidBackward(t *testing.T) {
 }
 
 func TestRangeIterator_ExhaustionStability(t *testing.T) {
-	it := core.NewRangeIterator(0, 1, 1)
+	it := core.Range(0, 1, 1)
 
 	_, _ = it.Next()
 
@@ -84,5 +84,5 @@ func TestRangeIterator_StepZeroPanics(t *testing.T) {
 		}
 	}()
 
-	core.NewRangeIterator(0, 10, 0)
+	core.Range(0, 10, 0)
 }

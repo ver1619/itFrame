@@ -7,7 +7,7 @@ import (
 )
 
 func TestSliceIterator_Normal(t *testing.T) {
-	it := core.NewSliceIterator([]int{1, 2, 3})
+	it := core.Slice([]int{1, 2, 3})
 
 	expected := []int{1, 2, 3}
 	for i, v := range expected {
@@ -27,7 +27,7 @@ func TestSliceIterator_Normal(t *testing.T) {
 }
 
 func TestSliceIterator_Empty(t *testing.T) {
-	it := core.NewSliceIterator([]int{})
+	it := core.Slice([]int{})
 
 	_, ok := it.Next()
 	if ok {
@@ -37,7 +37,7 @@ func TestSliceIterator_Empty(t *testing.T) {
 
 func TestSliceIterator_Nil(t *testing.T) {
 	var data []int
-	it := core.NewSliceIterator(data)
+	it := core.Slice(data)
 
 	_, ok := it.Next()
 	if ok {
@@ -46,7 +46,7 @@ func TestSliceIterator_Nil(t *testing.T) {
 }
 
 func TestSliceIterator_ExhaustionStability(t *testing.T) {
-	it := core.NewSliceIterator([]int{1})
+	it := core.Slice([]int{1})
 
 	_, _ = it.Next()
 
