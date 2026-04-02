@@ -7,6 +7,15 @@
 - SliceIterator
 - RangeIterator (end-exclusive semantics)
 
+
+### Modify 
+
+- Changed function naming<br>
+`NewSliceIterator` -> `Slice`<br>
+`NewRangeIterator` -> `Range`
+
 ---
+
+
 
 
