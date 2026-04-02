@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	it := core.NewRangeIterator(0, 5, 1)
+	it := core.Range(0, 5, 1)
 
 	for {
 		val, ok := it.Next()

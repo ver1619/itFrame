@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	it := core.NewSliceIterator([]int{10, 20, 30})
+	it := core.Slice([]int{10, 20, 30})
 
 	for {
 		val, ok := it.Next()
