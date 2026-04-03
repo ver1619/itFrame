@@ -44,15 +44,13 @@ func (r *RangeIterator) Next() (int, bool) {
 }
 
 /*
-RangeIterator generates a sequence of integers like a loop.
-NewRangeIterator(start, end, step) defines the sequence.
+- **RangeIterator** generates a sequence of integers like a loop.
+- **Range(start, end, step)** defines the sequence.
+- step must not be 0 (will panic).
 
-step must not be 0 (will panic).
+- Supports:
+  - forward iteration (step > 0)
+  - backward iteration (step < 0)
 
-Supports:
-forward iteration (step > 0)
-backward iteration (step < 0)
-
-If the range is invalid (e.g., start ≥ end with positive step), iteration ends immediately.
-
+- If the range is invalid (e.g., start ≥ end with positive step), iteration ends immediately.
 */

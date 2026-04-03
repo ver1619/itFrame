@@ -20,6 +20,6 @@ func (s *SliceIterator[T]) Next() (T, bool) {
 }
 
 /*
-SliceIterator lets you iterate over a slice one element at a time using Next().
-NewSliceIterator(data) creates an iterator without copying the slice.
+- **SliceIterator** lets you iterate over a slice one element at a time using Next().
+- **Slice(data)** creates an iterator without copying the slice.
 */
