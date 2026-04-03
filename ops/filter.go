@@ -27,11 +27,14 @@ func (f *FilterIterator[T]) Next() (T, bool) {
 	}
 }
 
-/*FilterIterator returns only values that satisfy a condition.
-Filter(it, pred) creates a new iterator using a predicate function.
+/*
+- **FilterIterator** returns only values that satisfy a condition.
+- **Filter(it, pred)** creates a new iterator using a predicate function.
 
-Each call to Next():
-- pulls values from underlying iterator
-- skips values that don’t match pred
-- returns first matching value
+- Each call to Next():
+  - pulls values from underlying iterator
+  - skips values that don’t match pred
+  - returns first matching value
+
+- Execution is lazy (nothing happens until Next() is called).
 */

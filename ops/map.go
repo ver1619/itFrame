@@ -22,3 +22,16 @@ func (m *MapIterator[A, B]) Next() (B, bool) {
 	}
 	return m.fn(val), true
 }
+
+/*
+- **MapIterator** transforms each element from an iterator.
+- **Map(it, fn)** creates a new iterator applying fn to every value.
+
+- Each call to Next():
+   - fetches value from underlying iterator
+   - applies transformation
+   - returns result
+
+- No values are stored; transformation happens on-demand (lazy).
+- Output type can differ from input type (A → B).
+*/
