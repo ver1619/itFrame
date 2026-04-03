@@ -33,3 +33,22 @@
 
 - Lazy transformation and filtering
 - Composable iterator pipeline introduced
+
+---
+
+## v0.3.0 - 2026-04-03
+
+### Added
+
+- `Reduce`
+- `Count`
+- `Collect`
+- `Any` / `All`
+
+### Modify
+- Refined and formatted comments in `./core` `./ops`
+
+### Notes
+- Introduced **Terminal operations**
+- Iterators are consumed after terminal execution
+- `Any` / `All` support short-circuit evaluation

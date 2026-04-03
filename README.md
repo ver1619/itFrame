@@ -15,6 +15,7 @@
 - RangeIterator (end-exclusive)
 - MapIterator
 - FilterIterator
+- Terminal Operations (Reduce, Count, Any, All, Collect)
 
 ---
 
