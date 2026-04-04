@@ -16,6 +16,7 @@
 - MapIterator
 - FilterIterator
 - Terminal Operations (Reduce, Count, Any, All, Collect)
+- Stream[T] abstraction over Iterators(chainable API on top of iterator system)
 
 ---
 
