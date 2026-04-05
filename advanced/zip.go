@@ -2,11 +2,6 @@ package advanced
 
 import "github.com/ver1619/itFrame/core"
 
-type Pair[A, B any] struct {
-	First  A
-	Second B
-}
-
 type ZipIterator[A, B any] struct {
 	it1 core.Iterator[A]
 	it2 core.Iterator[B]
