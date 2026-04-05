@@ -76,3 +76,23 @@
 - Supports composable, chainable pipelines
 - Terminal operations consume the stream
 - Existing iterator-based operations remain as lower-level primitives
+
+---
+
+# Fifth Release
+
+## v0.5.0 - 2026-04-05
+
+### Added
+
+- PeekIterator
+- MergeIterator (stable merge)
+- ZipIterator
+
+### Notes
+
+- Introduced multi-source iteration
+- Added lookahead capability
+- Supports sorted merge pipelines
+
+---
