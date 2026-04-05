@@ -18,6 +18,8 @@
 - Terminal Operations (Reduce, Count, Any, All, Collect)
 - Stream[T] abstraction over Iterators(chainable API on top of iterator system)
 - Advanced Operations (Peek, Merge, Zip)
+- Introduced ordering-aware operations (MergeDistinct, ZipWith, ZipLongest, Seek)
+
 
 ---
 

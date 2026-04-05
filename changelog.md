@@ -4,9 +4,9 @@
 
 ### Added
 
-- Iterator[T] interface (pull-based contract)
-- SliceIterator
-- RangeIterator (end-exclusive semantics)
+- `Iterator[T]` interface (pull-based contract)
+- `SliceIterator`
+- `RangeIterator` (end-exclusive semantics)
 
 ### Notes
 
@@ -20,8 +20,8 @@
 
 ### Added
 
-- MapIterator
-- FilterIterator
+- `MapIterator`
+- `FilterIterator`
 
 ### Modify
 
@@ -67,7 +67,7 @@
 - Fluent API for:
     - Map
     - Filter
-- Terminal methods on Stream (Reduce, Collect, Count, Any, All)    
+- Terminal methods on Stream (`Reduce`, `Collect`, `Count`, `Any`, `All`)    
 
 
 ### Notes
@@ -85,9 +85,9 @@
 
 ### Added
 
-- PeekIterator
-- MergeIterator (stable merge)
-- ZipIterator
+- `PeekIterator`
+- `MergeIterator` (stable merge)
+- `ZipIterator`
 
 ### Notes
 
@@ -96,3 +96,19 @@
 - Supports sorted merge pipelines
 
 ---
+
+# Sixth Release
+
+## v0.6.0
+
+### Added
+- `Comparator abstraction`
+- `MergeDistinctIterator`
+- `SeekIterator`
+- `ZipWithIterator`
+- `ZipLongestIterator`
+
+### Notes
+- Introduced ordering-aware operations
+- Enabled deduplication and alignment semantics
+- Prepared foundation for relational operations (v0.7)
