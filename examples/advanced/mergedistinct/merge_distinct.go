@@ -14,13 +14,11 @@ func main() {
 		return a < b
 	})
 
-	it := advanced.Merge(
-		core.Slice([]int{1, 3, 5}),
-		core.Slice([]int{2, 4, 6}),
+	it := advanced.MergeDistinct(
+		core.Slice([]int{1, 2, 3, 5}),
+		core.Slice([]int{2, 3, 4}),
 		cmp,
 	)
 
-	result := ops.Collect(it)
-
-	fmt.Println(result)
+	fmt.Println(ops.Collect(it))
 }

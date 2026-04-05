@@ -9,9 +9,9 @@ import (
 )
 
 func main() {
-	it := advanced.Zip(
-		core.Slice([]int{1, 2, 3, 4}),
-		core.Slice([]string{"a", "b", "c"}),
+	it := advanced.Seek(
+		core.Range(0, 10, 1),
+		func(x int) bool { return x >= 5 },
 	)
 
 	fmt.Println(ops.Collect(it))

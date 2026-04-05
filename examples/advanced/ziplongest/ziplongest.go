@@ -9,9 +9,9 @@ import (
 )
 
 func main() {
-	it := advanced.Zip(
-		core.Slice([]int{1, 2, 3, 4}),
-		core.Slice([]string{"a", "b", "c"}),
+	it := advanced.ZipLongest(
+		core.Slice([]int{1, 2, 3}),
+		core.Slice([]string{"a", "b"}),
 	)
 
 	fmt.Println(ops.Collect(it))
