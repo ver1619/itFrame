@@ -19,7 +19,8 @@
 - Stream[T] abstraction over Iterators(chainable API on top of iterator system)
 - Advanced Operations (Peek, Merge, Zip)
 - Introduced ordering-aware operations (MergeDistinct, ZipWith, ZipLongest, Seek)
-
+- FlatMap
+- Relational Operations (Join, LeftJoin, Crossjoin, GroupBy) and Aggregation.
 
 ---
 

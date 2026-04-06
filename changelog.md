@@ -99,7 +99,7 @@
 
 # Sixth Release
 
-## v0.6.0
+## v0.6.0 - 2026-04-06
 
 ### Added
 - `Comparator abstraction`
@@ -112,3 +112,22 @@
 - Introduced ordering-aware operations
 - Enabled deduplication and alignment semantics
 - Prepared foundation for relational operations (v0.7)
+
+---
+
+# Seventh Release
+
+## v0.7.0 - 2026-04-07
+
+### Added
+- `FlatMap`
+- `CrossJoin`
+- `Join` (inner join)
+- `LeftJoin`
+- `GroupBy`
+- `Aggregate`
+
+### Notes
+- Introduced relational operations
+- Enabled grouping and aggregation
+- Transitioned toward query-engine capabilities
