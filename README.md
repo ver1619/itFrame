@@ -21,6 +21,7 @@
 - Introduced ordering-aware operations (MergeDistinct, ZipWith, ZipLongest, Seek)
 - FlatMap
 - Relational Operations (Join, LeftJoin, Crossjoin, GroupBy) and Aggregation.
+- Error Aware Iteration
 
 ---
 

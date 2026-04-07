@@ -131,3 +131,20 @@
 - Introduced relational operations
 - Enabled grouping and aggregation
 - Transitioned toward query-engine capabilities
+
+---
+
+# Eigthed Release
+
+## v0.8.0 - 2026-04-08
+
+### Added
+- `Result[T]` for error-aware values
+- Error-aware `Map`, `Filter`, `FLatMap`
+- Error-aware Stream API
+- `Collect` with error handling
+
+### Notes
+- Introduced error propogation in pipelines
+- Enabled safe data processing workflows
+
