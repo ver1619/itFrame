@@ -1,13 +1,14 @@
-// Map (error-aware)
 package errors
 
 import "github.com/ver1619/itFrame/core"
 
+// MapIterator applies a transformation to valid values, propagating errors unchanged.
 type MapIterator[A, B any] struct {
 	it core.Iterator[Result[A]]
 	fn func(A) B
 }
 
+// Map creates an error-aware MapIterator. Errors propagate automatically.
 func Map[A, B any](
 	it core.Iterator[Result[A]],
 	fn func(A) B,
@@ -15,6 +16,7 @@ func Map[A, B any](
 	return &MapIterator[A, B]{it: it, fn: fn}
 }
 
+// Next returns the next transformed result, or (zero, false) when exhausted.
 func (m *MapIterator[A, B]) Next() (Result[B], bool) {
 	r, ok := m.it.Next()
 	if !ok {
@@ -29,13 +31,13 @@ func (m *MapIterator[A, B]) Next() (Result[B], bool) {
 	return Ok(m.fn(r.Value)), true
 }
 
-// Filter (error-aware)
-
+// FilterIterator yields valid values that satisfy a predicate, propagating errors unchanged.
 type FilterIterator[T any] struct {
 	it   core.Iterator[Result[T]]
 	pred func(T) bool
 }
 
+// Filter creates an error-aware FilterIterator. Errors propagate automatically.
 func Filter[T any](
 	it core.Iterator[Result[T]],
 	pred func(T) bool,
@@ -43,6 +45,7 @@ func Filter[T any](
 	return &FilterIterator[T]{it: it, pred: pred}
 }
 
+// Next returns the next matching result, or (zero, false) when exhausted.
 func (f *FilterIterator[T]) Next() (Result[T], bool) {
 	for {
 		r, ok := f.it.Next()
@@ -60,9 +63,3 @@ func (f *FilterIterator[T]) Next() (Result[T], bool) {
 		}
 	}
 }
-
-/*
-- errors propagate automatically
-- normal values are transformed
-- operations do not suppress errors
-*/

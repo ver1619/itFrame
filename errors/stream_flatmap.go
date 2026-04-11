@@ -9,6 +9,8 @@ type flatMapIterator[A, B any] struct {
 	inner core.Iterator[Result[B]]
 }
 
+// FlatMap maps each valid value to an iterator and flattens the results.
+// Errors propagate immediately without expansion.
 func (s Stream[A]) FlatMap(fn func(A) core.Iterator[Result[A]]) Stream[A] {
 	return Stream[A]{
 		it: &flatMapIterator[A, A]{
@@ -44,8 +46,3 @@ func (f *flatMapIterator[A, B]) Next() (Result[B], bool) {
 		}
 	}
 }
-
-/*
-- propagates errors immediately
-- expand valid values
-*/
