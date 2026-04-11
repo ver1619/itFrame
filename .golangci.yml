@@ -1,0 +1,47 @@
+run:
+  # Timeout for analysis, e.g. 5m, 1h. Default is 1m.
+  timeout: 5m
+  # Include tests in the linting process.
+  tests: true
+
+linters-settings:
+  govet:
+    # Enable all analyzers
+    enable-all: true
+    disable:
+      - fieldalignment # Often overly strict for normal structs
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+linters:
+  # Disable all default linters and explicitly enable what we want.
+  disable-all: true
+  enable:
+    # Default golangci-lint linters:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    # Additional robust linters:
+    - gofmt
+    - goimports
+    - misspell
+    - unparam
+    - prealloc
+    - unconvert
+    - asciicheck
+    - makezero
+    - nilerr
+
+issues:
+  # Exclude some common acceptable patterns in our highly generic library
+  exclude-rules:
+    # Allow unkeyed struct fields in tests if they exist
+    - path: _test\.go
+      linters:
+        - govet
+        - errcheck
