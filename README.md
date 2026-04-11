@@ -22,6 +22,9 @@
 - FlatMap
 - Relational Operations (Join, LeftJoin, Crossjoin, GroupBy) and Aggregation.
 - Error Aware Iteration
+- Added Benchmarks and edge-case tests
+- Merged advanced into ops
+- Added new features with some refinements
 
 ---
 
