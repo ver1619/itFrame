@@ -23,7 +23,7 @@
 - `MapIterator`
 - `FilterIterator`
 
-### Modify
+### Modified
 
 - Changed function naming<br>
   `NewSliceIterator` -> `Slice`<br>
@@ -47,7 +47,7 @@
 - `Collect`
 - `Any` / `All`
 
-### Modify
+### Modified
 - Refined and formatted comments in `./core` `./ops`
 
 ### Notes
@@ -134,17 +134,60 @@
 
 ---
 
-# Eigthed Release
+# Eighth Release
 
 ## v0.8.0 - 2026-04-08
 
 ### Added
 - `Result[T]` for error-aware values
-- Error-aware `Map`, `Filter`, `FLatMap`
+- Error-aware `Map`, `Filter`, `FlatMap`
 - Error-aware Stream API
 - `Collect` with error handling
 
 ### Notes
-- Introduced error propogation in pipelines
+- Introduced error propagation in pipelines
 - Enabled safe data processing workflows
 
+---
+
+# Ninth Release
+
+## v0.9.0 - 2026-04-13
+
+### Added
+
+- Core control operations:
+  - `Take(n)`, `Skip(n)`
+  - `TakeWhile`, `DropWhile`
+  - `Chain(it1, it2)`
+
+- Terminal operation:
+  - `ForEach`
+
+- Advanced operations:
+  - `Scan` (running accumulation)
+  - `GroupBySorted` (memory-efficient grouping for sorted inputs)
+  - `Distinct` (comparator-based de-duplication)
+
+- `FlatMapIter` for iterator-based expansion
+- Benchmark suite for performance comparison (native vs itFrame)
+
+### Modified
+
+- `FlatMap` redesigned to use slice-based expansion  (`func(T) []U`)
+- Previous iterator-based behavior moved to `FlatMapIter`
+- Stream API extended with new control and terminal operations
+- Unified API surface by merging `advanced` operations into `ops`
+- Examples and tests updated to reflect new APIs
+
+### Fixed
+
+- Resolved all `go vet` issues
+- Removed unused/dead internal code
+- Improved documentation with full godoc coverage
+
+### Notes
+- `FlatMap` is now optimized for performance and is the default choice
+- `FlatMapIter` remains available for iterator-based use-cases
+- API surface simplified with all operations under `ops`
+- Benchmarks and edge-case tests added to validate performance and correctness
