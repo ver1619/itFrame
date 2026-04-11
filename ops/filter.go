@@ -2,18 +2,21 @@ package ops
 
 import "github.com/ver1619/itFrame/core"
 
+// FilterIterator yields only elements that satisfy a predicate.
 type FilterIterator[T any] struct {
 	it   core.Iterator[T]
 	pred func(T) bool
 }
 
-func Filter[T any](it core.Iterator[T], pred func(T) bool) *FilterIterator[T] {
+// Filter creates a FilterIterator that keeps elements matching pred.
+func Filter[T any](it core.Iterator[T], pred func(T) bool) core.Iterator[T] {
 	return &FilterIterator[T]{
 		it:   it,
 		pred: pred,
 	}
 }
 
+// Next returns the next element satisfying the predicate, or (zero, false) when exhausted.
 func (f *FilterIterator[T]) Next() (T, bool) {
 	for {
 		val, ok := f.it.Next()
@@ -26,15 +29,3 @@ func (f *FilterIterator[T]) Next() (T, bool) {
 		}
 	}
 }
-
-/*
-- **FilterIterator** returns only values that satisfy a condition.
-- **Filter(it, pred)** creates a new iterator using a predicate function.
-
-- Each call to Next():
-  - pulls values from underlying iterator
-  - skips values that don’t match pred
-  - returns first matching value
-
-- Execution is lazy (nothing happens until Next() is called).
-*/

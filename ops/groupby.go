@@ -2,16 +2,20 @@ package ops
 
 import "github.com/ver1619/itFrame/core"
 
+// Group holds a key and its associated items produced by GroupBy.
 type Group[K comparable, V any] struct {
 	Key   K
 	Items []V
 }
 
+// GroupByIterator yields groups of elements sharing the same key.
 type GroupByIterator[T any, K comparable] struct {
 	groups []Group[K, T]
 	idx    int
 }
 
+// GroupBy consumes the iterator and groups elements by the key returned from keyFn.
+// The entire input is buffered internally. Group order is not guaranteed.
 func GroupBy[T any, K comparable](
 	it core.Iterator[T],
 	keyFn func(T) K,
@@ -28,7 +32,6 @@ func GroupBy[T any, K comparable](
 		groupMap[k] = append(groupMap[k], v)
 	}
 
-	// convert map → slice
 	groups := make([]Group[K, T], 0, len(groupMap))
 	for k, items := range groupMap {
 		groups = append(groups, Group[K, T]{
@@ -40,6 +43,7 @@ func GroupBy[T any, K comparable](
 	return &GroupByIterator[T, K]{groups: groups}
 }
 
+// Next returns the next group, or (zero, false) when exhausted.
 func (g *GroupByIterator[T, K]) Next() (Group[K, T], bool) {
 	if g.idx >= len(g.groups) {
 		var zero Group[K, T]
@@ -50,10 +54,3 @@ func (g *GroupByIterator[T, K]) Next() (Group[K, T], bool) {
 	g.idx++
 	return val, true
 }
-
-/*
-- **GroupBy** groups elements by a key.
-- Entire input is buffered internally.
-- Each group contains a key and its items.
-- Order of groups is not guaranteed.
-*/

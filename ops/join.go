@@ -1,10 +1,8 @@
 package ops
 
-import (
-	"github.com/ver1619/itFrame/advanced"
-	"github.com/ver1619/itFrame/core"
-)
+import "github.com/ver1619/itFrame/core"
 
+// JoinIterator performs an inner join between two iterators using key functions.
 type JoinIterator[A, B, K comparable] struct {
 	left core.Iterator[A]
 	hash map[K][]B
@@ -17,16 +15,17 @@ type JoinIterator[A, B, K comparable] struct {
 	hasCurr bool
 }
 
+// Join creates an inner join iterator. The right iterator is fully buffered into a hash map.
+// The left iterator is consumed lazily. Only matching pairs are returned.
 func Join[A, B, K comparable](
 	left core.Iterator[A],
 	right core.Iterator[B],
 	leftKey func(A) K,
 	rightKey func(B) K,
-) core.Iterator[advanced.Pair[A, B]] {
+) core.Iterator[Pair[A, B]] {
 
 	hash := make(map[K][]B)
 
-	// build hash table from right iterator
 	for {
 		v, ok := right.Next()
 		if !ok {
@@ -43,11 +42,12 @@ func Join[A, B, K comparable](
 	}
 }
 
-func (j *JoinIterator[A, B, K]) Next() (advanced.Pair[A, B], bool) {
+// Next returns the next matched pair, or (zero, false) when exhausted.
+func (j *JoinIterator[A, B, K]) Next() (Pair[A, B], bool) {
 	for {
 		if j.hasCurr {
 			if j.idx < len(j.currBs) {
-				p := advanced.Pair[A, B]{
+				p := Pair[A, B]{
 					First:  j.currA,
 					Second: j.currBs[j.idx],
 				}
@@ -60,7 +60,7 @@ func (j *JoinIterator[A, B, K]) Next() (advanced.Pair[A, B], bool) {
 
 		a, ok := j.left.Next()
 		if !ok {
-			var zero advanced.Pair[A, B]
+			var zero Pair[A, B]
 			return zero, false
 		}
 
@@ -75,10 +75,3 @@ func (j *JoinIterator[A, B, K]) Next() (advanced.Pair[A, B], bool) {
 		j.hasCurr = true
 	}
 }
-
-/*
-- **Join** matches elements from two iterators using keys.
-- Right iterator is fully buffered internally.
-- Left iterator is streamed lazily.
-- Only matching pairs are returned (inner join).
-*/

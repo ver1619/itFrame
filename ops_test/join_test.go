@@ -4,7 +4,6 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ver1619/itFrame/advanced"
 	"github.com/ver1619/itFrame/core"
 	"github.com/ver1619/itFrame/ops"
 )
@@ -22,7 +21,7 @@ func TestJoin_Basic(t *testing.T) {
 
 	result := ops.Collect(it)
 
-	expected := []advanced.Pair[A, B]{
+	expected := []ops.Pair[A, B]{
 		{First: A{1}, Second: B{1}},
 		{First: A{1}, Second: B{1}},
 	}

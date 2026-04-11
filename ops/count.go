@@ -2,7 +2,7 @@ package ops
 
 import "github.com/ver1619/itFrame/core"
 
-// terminal operation
+// Count consumes an iterator and returns the number of elements.
 func Count[T any](it core.Iterator[T]) int {
 	count := 0
 
@@ -16,11 +16,3 @@ func Count[T any](it core.Iterator[T]) int {
 
 	return count
 }
-
-/*
-- **Count** returns the number of elements in an iterator.
-- It consumes the iterator completely.
-- Each call to Next() increments a counter.
-- Returns total number of elements.
-- Does not allocate memory.
-*/

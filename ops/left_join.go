@@ -1,10 +1,9 @@
 package ops
 
-import (
-	"github.com/ver1619/itFrame/advanced"
-	"github.com/ver1619/itFrame/core"
-)
+import "github.com/ver1619/itFrame/core"
 
+// LeftJoinIterator performs a left join between two iterators using key functions.
+// Unmatched left elements are emitted with a zero-value right element.
 type LeftJoinIterator[A, B, K comparable] struct {
 	left core.Iterator[A]
 	hash map[K][]B
@@ -15,20 +14,19 @@ type LeftJoinIterator[A, B, K comparable] struct {
 	currBs  []B
 	idx     int
 	hasCurr bool
-
-	emittedEmpty bool
 }
 
+// LeftJoin creates a left join iterator. The right iterator is fully buffered into a hash map.
+// All left elements are returned; unmatched left elements are paired with a zero-value right.
 func LeftJoin[A, B, K comparable](
 	left core.Iterator[A],
 	right core.Iterator[B],
 	leftKey func(A) K,
 	rightKey func(B) K,
-) core.Iterator[advanced.Pair[A, B]] {
+) core.Iterator[Pair[A, B]] {
 
 	hash := make(map[K][]B)
 
-	// build hash from right
 	for {
 		v, ok := right.Next()
 		if !ok {
@@ -45,12 +43,12 @@ func LeftJoin[A, B, K comparable](
 	}
 }
 
-func (j *LeftJoinIterator[A, B, K]) Next() (advanced.Pair[A, B], bool) {
+// Next returns the next pair, or (zero, false) when exhausted.
+func (j *LeftJoinIterator[A, B, K]) Next() (Pair[A, B], bool) {
 	for {
-		// emit matched values
 		if j.hasCurr {
 			if j.idx < len(j.currBs) {
-				p := advanced.Pair[A, B]{
+				p := Pair[A, B]{
 					First:  j.currA,
 					Second: j.currBs[j.idx],
 				}
@@ -61,14 +59,9 @@ func (j *LeftJoinIterator[A, B, K]) Next() (advanced.Pair[A, B], bool) {
 			j.idx = 0
 		}
 
-		// emit empty (no match case)
-		if j.emittedEmpty {
-			j.emittedEmpty = false
-		}
-
 		a, ok := j.left.Next()
 		if !ok {
-			var zero advanced.Pair[A, B]
+			var zero Pair[A, B]
 			return zero, false
 		}
 
@@ -82,18 +75,10 @@ func (j *LeftJoinIterator[A, B, K]) Next() (advanced.Pair[A, B], bool) {
 			continue
 		}
 
-		// no match → emit (A, zero B)
 		var zeroB B
-		return advanced.Pair[A, B]{
+		return Pair[A, B]{
 			First:  a,
 			Second: zeroB,
 		}, true
 	}
 }
-
-/*
-- **LeftJoin** returns all left elements, matched with right if available.
-- Right side is buffered internally (hash-based).
-- If no match → emits left with zero value of right.
-- Supports multiple matches (one-to-many)
-*/

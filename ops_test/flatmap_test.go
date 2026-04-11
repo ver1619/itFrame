@@ -11,21 +11,13 @@ import (
 func TestFlatMap_Basic(t *testing.T) {
 	it := ops.FlatMap(
 		core.Slice([]int{1, 2, 3}),
-		func(x int) core.Iterator[int] {
-			return core.Slice([]int{x, x * x})
+		func(v int) []int {
+			return []int{v, v * 10}
 		},
 	)
 
-	var result []int
-	for {
-		v, ok := it.Next()
-		if !ok {
-			break
-		}
-		result = append(result, v)
-	}
-
-	expected := []int{1, 1, 2, 4, 3, 9}
+	result := ops.Collect(it)
+	expected := []int{1, 10, 2, 20, 3, 30}
 
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("expected %v, got %v", expected, result)
@@ -34,25 +26,17 @@ func TestFlatMap_Basic(t *testing.T) {
 
 func TestFlatMap_EmptyInner(t *testing.T) {
 	it := ops.FlatMap(
-		core.Slice([]int{1, 2}),
-		func(x int) core.Iterator[int] {
-			if x == 1 {
-				return core.Slice([]int{})
+		core.Slice([]int{1, 2, 3}),
+		func(v int) []int {
+			if v == 2 {
+				return nil
 			}
-			return core.Slice([]int{2})
+			return []int{v}
 		},
 	)
 
-	var result []int
-	for {
-		v, ok := it.Next()
-		if !ok {
-			break
-		}
-		result = append(result, v)
-	}
-
-	expected := []int{2}
+	result := ops.Collect(it)
+	expected := []int{1, 3}
 
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("expected %v, got %v", expected, result)
