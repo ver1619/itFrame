@@ -1,14 +1,17 @@
 package core
 
+// SliceIterator iterates over elements of a slice without copying.
 type SliceIterator[T any] struct {
 	data []T
 	idx  int
 }
 
+// Slice creates a SliceIterator from the given slice.
 func Slice[T any](data []T) *SliceIterator[T] {
 	return &SliceIterator[T]{data: data}
 }
 
+// Next returns the next element from the slice, or (zero, false) when exhausted.
 func (s *SliceIterator[T]) Next() (T, bool) {
 	if s.idx >= len(s.data) {
 		var zero T
@@ -19,7 +22,11 @@ func (s *SliceIterator[T]) Next() (T, bool) {
 	return val, true
 }
 
-/*
-- **SliceIterator** lets you iterate over a slice one element at a time using Next().
-- **Slice(data)** creates an iterator without copying the slice.
-*/
+// Len returns the number of remaining elements.
+func (s *SliceIterator[T]) Len() int {
+	remaining := len(s.data) - s.idx
+	if remaining < 0 {
+		return 0
+	}
+	return remaining
+}

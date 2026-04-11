@@ -1,5 +1,6 @@
 package core
 
+// RangeIterator produces a sequence of integers defined by start, end, and step.
 type RangeIterator struct {
 	current int
 	end     int
@@ -7,6 +8,8 @@ type RangeIterator struct {
 	done    bool
 }
 
+// Range creates a RangeIterator over [start, end) with the given step.
+// Panics if step is zero.
 func Range(start, end, step int) *RangeIterator {
 	if step == 0 {
 		panic("step cannot be zero")
@@ -28,6 +31,7 @@ func Range(start, end, step int) *RangeIterator {
 	}
 }
 
+// Next returns the next integer in the range, or (0, false) when exhausted.
 func (r *RangeIterator) Next() (int, bool) {
 	if r.done {
 		return 0, false
@@ -43,14 +47,19 @@ func (r *RangeIterator) Next() (int, bool) {
 	return val, true
 }
 
-/*
-- **RangeIterator** generates a sequence of integers like a loop.
-- **Range(start, end, step)** defines the sequence.
-- step must not be 0 (will panic).
-
-- Supports:
-  - forward iteration (step > 0)
-  - backward iteration (step < 0)
-
-- If the range is invalid (e.g., start ≥ end with positive step), iteration ends immediately.
-*/
+// Len returns the number of remaining elements.
+func (r *RangeIterator) Len() int {
+	if r.done {
+		return 0
+	}
+	if r.step > 0 {
+		if r.current >= r.end {
+			return 0
+		}
+		return (r.end - r.current + r.step - 1) / r.step
+	}
+	if r.current <= r.end {
+		return 0
+	}
+	return (r.current - r.end + (-r.step) - 1) / (-r.step)
+}

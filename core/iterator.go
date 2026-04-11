@@ -1,23 +1,9 @@
+// Package core defines the Iterator interface and provides source iterators
+// for constructing lazy, single-pass data pipelines.
 package core
 
+// Iterator is a pull-based, lazy, single-pass generic iterator.
 type Iterator[T any] interface {
+	// Next returns the next element and true, or a zero value and false when exhausted.
 	Next() (T, bool)
 }
-
-/*
-DESIGN MODEL:
-  - Pull-based: The consumer drives iteration by calling Next().
-  - Lazy: Values are produced only when requested.
-  - Stateful: Each call to Next() advances internal state.
-
-METHOD CONTRACT:
-
-   Next() (T, bool)
-
-   Returns:
-     - (value, true)  → next element is available
-     - (zero, false) → iteration is complete (exhausted)
-
-- Iteration is single-pass (cannot restart).
-- No extra memory is used during iteration (efficient for large data).
-*/
