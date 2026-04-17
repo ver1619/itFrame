@@ -191,3 +191,26 @@
 - `FlatMapIter` remains available for iterator-based use-cases
 - API surface simplified with all operations under `ops`
 - Benchmarks and edge-case tests added to validate performance and correctness
+
+
+---
+
+# Pre-Release v1.0.0
+
+## v1.0.0-alpha
+
+### Fixed
+
+- Fixed **CI** failure issues:<br>
+
+  **Issue** : Caching failure due to no detection of `go.sum` in CI<br>
+  **Solution** : modified `.github/workflows/ci.yml` locally to add cache: false # no go.sum
+
+
+  **Issue** : the old `examples/flatmap/flatmap.go` code still existed in the repository.<br>
+  **Solution** : removed the outdated example code
+  
+### Notes 
+- Fixed CI issues
+- There are currently no regressions, syntax errors, or failing test suites
+- The project is now ready for the final v1.0.0 release
