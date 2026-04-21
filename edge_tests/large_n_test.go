@@ -10,15 +10,15 @@ import (
 func TestLargeN(t *testing.T) {
 	// 10 million elements
 	const n = 10_000_000
-	
+
 	t.Run("RangeLaziness", func(t *testing.T) {
 		// Range should be instantaneous even for 10M elements
 		it := core.Range(0, n, 1)
-		
+
 		// Take only first 3
 		res := ops.Take(it, 3)
 		slice := ops.Collect(res)
-		
+
 		if len(slice) != 3 {
 			t.Errorf("expected 3 elements, got %d", len(slice))
 		}
@@ -38,7 +38,7 @@ func TestLargeN(t *testing.T) {
 		for i := 0; i < 100; i++ {
 			it = ops.Map(it, func(x int) int { return x + 1 })
 		}
-		
+
 		v, ok := it.Next()
 		if !ok || v != 100 {
 			t.Errorf("expected 100, got %v", v)

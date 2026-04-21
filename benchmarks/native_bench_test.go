@@ -132,9 +132,7 @@ func BenchmarkCollectSized(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		res := make([]int, 0, len(data))
-		for _, v := range data {
-			res = append(res, v)
-		}
+		res = append(res, data...)
 		sinkSlice = res
 	}
 }
@@ -147,9 +145,7 @@ func BenchmarkCollectUnsized(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		res := []int{}
-		for _, v := range data {
-			res = append(res, v)
-		}
+		res = append(res, data...)
 		sinkSlice = res
 	}
 }

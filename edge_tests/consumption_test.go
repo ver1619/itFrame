@@ -9,7 +9,7 @@ import (
 func TestIteratorDoubleConsumption(t *testing.T) {
 	t.Run("SliceIterator", func(t *testing.T) {
 		it := core.Slice([]int{1, 2})
-		
+
 		// First pass
 		v1, ok1 := it.Next()
 		if !ok1 || v1 != 1 {

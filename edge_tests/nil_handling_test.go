@@ -24,7 +24,7 @@ func TestNilHandling(t *testing.T) {
 			}
 			return []int{x}
 		})
-		
+
 		res := ops.Collect(it)
 		if len(res) != 2 || res[0] != 1 || res[1] != 3 {
 			t.Errorf("Expected [1 3], got %v", res)
