@@ -11,9 +11,7 @@ A pull-based, generic iterator framework for Go — build lazy, composable, and 
 
 ## Overview
 
-**itFrame** gives you a simple way to process data step-by-step in Go — without loading everything into memory at once. You describe *what* to do (filter, map, group, join) and itFrame figures out *when* to do it, pulling values through the pipeline only as needed.
-
-Think of it like a conveyor belt: each item moves through your operations one at a time, and nothing runs until you ask for the final result.
+**itFrame** gives you a simple way to process data step-by-step in Go — without loading everything into memory at once. You describe *what* to do (filter, map, group, join) and itFrame figures out *when* to do it, pulling values through the pipeline only when needed.
 
 ---
 
@@ -23,9 +21,9 @@ Think of it like a conveyor belt: each item moves through your operations one at
 - **30+ Operations** — Map, Filter, FlatMap, Reduce, Scan, Take, Skip, Zip, Merge, Join, GroupBy, Aggregate, and more
 - **Fluent Stream API** — chain operations with `stream.Slice(data).Filter(...).Map(...).Collect()`
 - **Error-Aware Pipelines** — wrap values in `Result[T]` and errors propagate automatically without crashing
-- **Zero-Allocation Core** — Map, Filter, FlatMap, and Merge run with **0 B/op** in native benchmarks
+- **Zero-Allocation Core** — `Map`, `Filter`, `FlatMap`, and `Merge` run with **0 B/op** in native benchmarks
 - **Relational Operations** — SQL-style `Join`, `LeftJoin`, `CrossJoin`, and `GroupBy` with `Aggregate`
-- **Comparator System** — pluggable ordering for Merge, Distinct, and multi-field sorting
+- **Comparator System** — pluggable ordering for `Merge`, `Distinct`, and multi-field sorting
 - **Pre-Allocation** — `SizedIterator` lets `Collect` pre-allocate slices for known-length sources
 
 ---
